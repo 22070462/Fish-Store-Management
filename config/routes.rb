@@ -1,9 +1,6 @@
 require 'sidekiq/web' # Ensure this is explicitly required
 
 Rails.application.routes.draw do
-  get 'customers/index'
-  get 'customers/show'
-
   # Admin Panel
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -27,8 +24,12 @@ Rails.application.routes.draw do
   # Fish resource (if you need it for later purposes, though you're not selling fish)
   resources :fish, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
-  resources :customers, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  
+  # Routes for Customers
+  resources :customers do
+    # Nested transactions routes under customers
+    resources :transactions, only: [:index]
+  end
+
   # Set the root path to home#index
   root to: 'home#index'
 end

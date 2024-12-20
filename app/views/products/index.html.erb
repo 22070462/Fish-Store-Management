@@ -23,9 +23,7 @@
       <%= link_to "Sort by Price (High to Low)", products_path(sort_order: "desc"), class: "bg-gray-200 px-4 py-2 rounded" %>
     </div>
 
-    <%= link_to new_product_path, class: button_class(theme: "primary") do %>
-      Add New Product
-    <% end %>
+
   </div>
 
   <!-- Product Table -->
@@ -36,7 +34,7 @@
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Price</th>
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Quantity</th>
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Category</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Actions</th>
+        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Image</th>
       </tr>
     </thead>
 
@@ -47,9 +45,15 @@
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= number_to_currency(product.price) %></td>
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= product.quantity %></td>
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= product.category %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-            <%= link_to 'Edit', edit_product_path(product), class: "text-blue-500 hover:underline" %>
-          </td>
+          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
+  <% if product.image.attached? %>
+    <%= image_tag product.image, class: "w-16 h-16 object-cover mx-auto rounded" %>
+  <% else %>
+    <div class="w-16 h-16 bg-gray-200 text-gray-500 flex items-center justify-center mx-auto rounded">
+      No Image
+    </div>
+  <% end %>
+</td>
         </tr>
       <% end %>
     </tbody>

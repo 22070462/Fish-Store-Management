@@ -2,9 +2,7 @@
   <div class="flex items-center justify-between flex-wrap mb-6">
     <h1 class="text-3xl font-bold">Sales</h1>
 
-    <%= link_to new_sale_path, class: button_class(theme: "primary") do %>
-      Add New Sale
-    <% end %>
+ 
   </div>
 
   <table class="table-auto border-collapse border-slate-400 w-full">
@@ -13,7 +11,7 @@
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Product Name</th>
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Quantity</th>
         <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Total Price</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Actions</th>
+        
       </tr>
     </thead>
 
@@ -23,9 +21,7 @@
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= sale.product.name %></td> <!-- Displaying the product name -->
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= sale.quantity %></td>
           <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= number_to_currency(sale.total_price) %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-            <%= link_to 'Edit', edit_sale_path(sale), class: "text-blue-500 hover:underline" %> 
-          </td>
+          
         </tr>
       <% end %>
     </tbody>
