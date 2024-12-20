@@ -5,7 +5,7 @@
 - Member 1: Phạm Vũ Dương
 - Member 2: Lương Thanh Hằng
 - Member 3: Nguyễn Thanh Lâm
-- Member 4: Tuấn Nguyễn
+- Member 4: Nguyễn Văn Quốc Tuấn
 - Member 5: Nguyễn Quang Bảo
 
 
