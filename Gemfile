@@ -88,4 +88,6 @@ gem "dotenv-rails"
 # Rails Admin
 gem 'rails_admin'
 
+gem 'chartkick'
+gem 'groupdate'
 

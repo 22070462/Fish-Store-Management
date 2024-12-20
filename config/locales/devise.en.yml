@@ -17,16 +17,17 @@ en:
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
-      confirmation_instructions:
-        subject: "Confirmation instructions"
-      reset_password_instructions:
-        subject: "Reset password instructions"
-      unlock_instructions:
-        subject: "Unlock instructions"
-      email_changed:
-        subject: "Email Changed"
-      password_change:
-        subject: "Password Changed"
+  confirmation_instructions:
+    subject: "Welcome to Fish Store! Confirm your account"
+  reset_password_instructions:
+    subject: "Reset your password for Fish Store"
+  unlock_instructions:
+    subject: "Unlock your Fish Store account"
+  email_changed:
+    subject: "Your Fish Store email has been updated"
+  password_change:
+    subject: "Your Fish Store password has been updated"
+
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."

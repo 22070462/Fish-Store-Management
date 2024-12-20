@@ -1,34 +1,36 @@
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 mt-8"> <!-- Added margin-top -->
+  <!-- Page Header -->
   <div class="flex items-center justify-between flex-wrap mb-6">
     <h1 class="text-3xl font-bold">Fish</h1>
 
     <!-- Search and Filter Form -->
-    <%= form_with(url: fish_index_path, method: :get, local: true, class: "mb-4 flex items-center") do %>
+    <%= form_with(url: fish_index_path, method: :get, local: true, class: "flex items-center space-x-2 mb-4") do %>
       <!-- Search Field -->
-      <input type="text" name="query" placeholder="Search Fish..." value="<%= params[:query] %>" class="border border-gray-300 rounded-l px-4 py-2 w-64">
+      <input type="text" name="query" placeholder="Search Fish..." value="<%= params[:query] %>" 
+             class="border border-gray-300 rounded-l px-4 py-2 w-64 h-10">
       
       <!-- Water Type Filter -->
-      <select name="water_type" class="border border-gray-300 px-2 py-2">
+      <select name="water_type" class="border border-gray-300 px-2 py-2 h-10 rounded-none">
         <option value="">Filter by Water Type</option>
         <option value="freshwater" <%= 'selected' if params[:water_type] == 'freshwater' %>>Freshwater</option>
         <option value="saltwater" <%= 'selected' if params[:water_type] == 'saltwater' %>>Saltwater</option>
       </select>
 
       <!-- Submit Button -->
-      <button type="submit" class="bg-blue-500 text-white rounded-r px-4 py-2">Search</button>
+      <button type="submit" class="bg-blue-500 text-white rounded-r px-4 py-2 h-10">
+        Search
+      </button>
     <% end %>
+  </div>
 
-    <!-- Sort Buttons -->
-    <div class="mt-2">
-      <%= link_to "Sort by Price (Low to High)", fish_index_path(sort_order: "asc"), class: "bg-gray-200 px-4 py-2 rounded mr-2" %>
-      <%= link_to "Sort by Price (High to Low)", fish_index_path(sort_order: "desc"), class: "bg-gray-200 px-4 py-2 rounded" %>
-    </div>
-
- 
+  <!-- Sort Buttons -->
+  <div class="flex justify-end mt-2 space-x-4"> <!-- Added `space-x-4` for spacing -->
+    <%= link_to "Sort by Price (Low to High)", fish_index_path(sort_order: "asc"), class: "bg-gray-200 px-4 py-2 rounded" %>
+    <%= link_to "Sort by Price (High to Low)", fish_index_path(sort_order: "desc"), class: "bg-gray-200 px-4 py-2 rounded" %>
   </div>
 
   <!-- Fish Table -->
-  <table class="table-auto border-collapse border-slate-400 w-full">
+  <table class="table-auto border-collapse border-slate-400 w-full mt-4">
     <thead class="bg-slate-50 dark:bg-slate-700">
       <tr>
         <th class="border border-slate-300 p-4 text-left">Name</th>
@@ -53,13 +55,12 @@
           <td class="border border-slate-300 p-4"><%= fish.quantity %></td>
           <td class="border border-slate-300 p-4"><%= fish.description %></td>
           <td class="border border-slate-300 p-4">
-  <% if fish.image.attached? %>
-    <!-- Increase image size here -->
-    <%= image_tag fish.image.variant(resize_to_limit: [200, 200]), class: "w-32 h-32 object-cover" %>
-  <% else %>
-    <span>No Image</span>
-  <% end %>
-</td>
+            <% if fish.image.attached? %>
+              <%= image_tag fish.image.variant(resize_to_limit: [200, 200]), class: "w-32 h-32 object-cover" %>
+            <% else %>
+              <span>No Image</span>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

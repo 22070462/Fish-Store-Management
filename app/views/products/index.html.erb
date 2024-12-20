@@ -1,59 +1,65 @@
 <div class="container mx-auto px-4">
+  <!-- Page Header -->
   <div class="flex items-center justify-between flex-wrap mb-6">
     <h1 class="text-3xl font-bold">Products</h1>
 
     <!-- Search and Filter Form -->
-    <%= form_with(url: products_path, method: :get, local: true, class: "mb-4 flex items-center") do %>
-      <input type="text" name="query" placeholder="Search Products..." value="<%= params[:query] %>" class="border border-gray-300 rounded-l px-4 py-2 w-64">
+    <%= form_with(url: products_path, method: :get, local: true, class: "flex items-center space-x-2 mb-4") do %>
+      <!-- Search Field -->
+      <input type="text" name="query" placeholder="Search Products..." value="<%= params[:query] %>" 
+             class="border border-gray-300 rounded-l px-4 py-2 w-64 h-10">
 
       <!-- Category Filter -->
-      <select name="category" class="border border-gray-300 px-2 py-2">
+      <select name="category" class="border border-gray-300 px-2 py-2 h-10 rounded-none">
         <option value="">Filter by Category</option>
         <option value="Fish Supplies" <%= 'selected' if params[:category] == 'Fish Supplies' %>>Fish Supplies</option>
         <option value="Equipment" <%= 'selected' if params[:category] == 'Equipment' %>>Equipment</option>
         <!-- Add other categories as needed -->
       </select>
 
-      <button type="submit" class="bg-blue-500 text-white rounded-r px-4 py-2">Search</button>
+      <!-- Submit Button -->
+      <button type="submit" class="bg-blue-500 text-white rounded-r px-4 py-2 h-10">
+        Search
+      </button>
     <% end %>
+  </div>
 
-    <!-- Sort Buttons -->
-    <div class="mt-2">
-      <%= link_to "Sort by Price (Low to High)", products_path(sort_order: "asc"), class: "bg-gray-200 px-4 py-2 rounded mr-2" %>
-      <%= link_to "Sort by Price (High to Low)", products_path(sort_order: "desc"), class: "bg-gray-200 px-4 py-2 rounded" %>
-    </div>
-
-
+  <!-- Sort Buttons -->
+  <div class="flex justify-end mt-2 space-x-4">
+    <%= link_to "Sort by Price (Low to High)", products_path(sort_order: "asc"), class: "bg-gray-200 px-4 py-2 rounded" %>
+    <%= link_to "Sort by Price (High to Low)", products_path(sort_order: "desc"), class: "bg-gray-200 px-4 py-2 rounded" %>
   </div>
 
   <!-- Product Table -->
-  <table class="table-auto border-collapse border-slate-400 w-full">
+  <table class="table-auto border-collapse border-slate-400 w-full mt-4">
     <thead class="bg-slate-50 dark:bg-slate-700">
       <tr>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Product Name</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Price</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Quantity</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Category</th>
-        <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Image</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Product Name</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Price</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Quantity</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Description</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Category</th>
+        <th class="border border-slate-300 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Image</th>
       </tr>
     </thead>
 
     <tbody>
       <% @products.each do |product| %>
-        <tr class="border-t">
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= product.name %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= number_to_currency(product.price) %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= product.quantity %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"><%= product.category %></td>
-          <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 text-center">
-  <% if product.image.attached? %>
-    <%= image_tag product.image, class: "w-16 h-16 object-cover mx-auto rounded" %>
-  <% else %>
-    <div class="w-16 h-16 bg-gray-200 text-gray-500 flex items-center justify-center mx-auto rounded">
-      No Image
-    </div>
-  <% end %>
-</td>
+        <tr>
+          <td class="border border-slate-300 p-4 text-slate-500 dark:text-slate-400"><%= product.name %></td>
+          <td class="border border-slate-300 p-4 text-slate-500 dark:text-slate-400"><%= number_to_currency(product.price) %></td>
+          <td class="border border-slate-300 p-4 text-slate-500 dark:text-slate-400"><%= product.quantity %></td>
+          <td class="border border-slate-300 p-4 text-slate-500 dark:text-slate-400"><%= product.description %></td>
+          <td class="border border-slate-300 p-4 text-slate-500 dark:text-slate-400"><%= product.category %></td>
+          <td class="border border-slate-300 p-4 text-center text-slate-500 dark:text-slate-400">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, class: "w-16 h-16 object-cover mx-auto rounded" %>
+            <% else %>
+              <div class="w-16 h-16 bg-gray-200 text-gray-500 flex items-center justify-center mx-auto rounded">
+                No Image
+              </div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
